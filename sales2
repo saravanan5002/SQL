@@ -1,0 +1,47 @@
+CREATE TABLE salessales2 (
+    sale_id INT PRIMARY KEY,
+    salesperson VARCHAR(50),
+    region VARCHAR(50),
+    product VARCHAR(50),
+    quantity INT,
+    sale_amount DECIMAL(10,2)
+);
+
+INSERT INTO sales2 (sale_id, salesperson, region, product, quantity, sale_amount) VALUES
+(2, 'Bob', 'South', 'Mouse', 3, 75.00),
+(3, 'Alice', 'North', 'Monitor', 2, 300.00),
+(4, 'Charlie', 'East', 'Keyboard', 1, 50.00),
+(5, 'Bob', 'South', 'Monitor', 1, 150.00),
+(6, 'Alice', 'North', 'Mouse', 2, 50.00),
+(7, 'Charlie', 'East', 'Laptop', 2, 2000.00),
+(8, 'David', 'West', 'Laptop', 1, 1100.00),
+(9, 'David', 'West', 'Mouse', 4, 100.00),
+(10, 'Eve', 'South', 'Monitor', 3, 450.00),
+(11, 'Eve', 'South', 'Keyboard', 2, 100.00),
+(12, 'Eve', 'South', 'Mouse', 1, 25.00),
+(13, 'Alice', 'North', 'Keyboard', 1, 60.00),
+(14, 'Bob', 'South', 'Laptop', 1, 1200.00),
+(15, 'Charlie', 'East', 'Mouse', 2, 50.00);
+
+SELECT Salesperson, SUM(Quantity) AS TotalQuantitySold FROM Sales GROUP BY Salesperson;
+SELECT Salesperson, SUM(Quantity) AS TotalQuantitySold FROM Sales GROUP BY Salesperson HAVING SUM(Quantity) > 5;
+SELECT Salesperson, COUNT(DISTINCT Product) AS ProductCount FROM Sales GROUP BY Salesperson;
+SELECT Region, SUM(SaleAmount) AS TotalSales FROM Sales GROUP BY Region HAVING SUM(SaleAmount) > 1000;
+SELECT Salesperson, COUNT(OrderID) AS TransactionCount FROM Sales GROUP BY Salesperson HAVING COUNT(OrderID) > 2;
+SELECT Product, SUM(SaleAmount) AS TotalSales FROM Sales GROUP BY Product HAVING SUM(SaleAmount) > 500;
+SELECT Region, Product, SUM(Quantity) AS TotalQuantity FROM Sales GROUP BY Region, Product;
+SELECT Salesperson, COUNT(DISTINCT Product) AS ProductTypes FROM Sales GROUP BY Salesperson HAVING COUNT(DISTINCT Product) > 1;
+SELECT Region, Product, AVG(Quantity) AS AvgQuantity FROM Sales GROUP BY Region, Product HAVING AVG(Quantity) > 1;
+SELECT Salesperson, SUM(SaleAmount) AS TotalSales FROM Sales GROUP BY Salesperson HAVING SUM(SaleAmount) BETWEEN 500 AND 1500;
+SELECT Product, SUM(Quantity) AS TotalQuantity FROM Sales GROUP BY Product HAVING SUM(Quantity) > 3;
+SELECT DISTINCT Salesperson FROM Sales WHERE Product = 'laptop';
+SELECT Salesperson, Region, SUM(SaleAmount) AS TotalSales FROM Sales GROUP BY Salesperson, Region HAVING SUM(SaleAmount) > 500;
+SELECT Salesperson, Region, COUNT(DISTINCT Product) AS ProductCount FROM Sales GROUP BY Salesperson, Region HAVING COUNT(DISTINCT Product) >= 2;
+SELECT Product, COUNT(DISTINCT Region) AS RegionCount FROM Sales GROUP BY Product HAVING COUNT(DISTINCT Region) > 1;
+SELECT Product, COUNT() AS SalesCount FROM Sales GROUP BY Product HAVING COUNT() >= 2;
+SELECT Region, Salesperson, SUM(Quantity) AS TotalQuantity FROM Sales GROUP BY Region, Salesperson;
+SELECT Salesperson, COUNT() AS TransactionCount, SUM(SaleAmount) AS TotalSales FROM Sales GROUP BY Salesperson HAVING COUNT() > 3 AND SUM(SaleAmount) > 1000;
+SELECT Region, AVG(SaleAmount) AS AvgSales FROM Sales GROUP BY Region HAVING AVG(SaleAmount) > 200;
+SELECT Region, Product, SUM(Quantity) AS TotalQuantity FROM Sales GROUP BY Region, Product HAVING SUM(Quantity) > 3;
+
+
